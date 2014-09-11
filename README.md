@@ -1,66 +1,35 @@
-##What's Countly?
+iOS - SDK
+=========
 
-[Countly](http://count.ly) is an innovative, real-time, open source mobile analytics application. It collects data 
-from mobile devices, and visualizes this information to analyze mobile application usage and end-user behavior. 
-There are two parts of Countly: the server that collects and analyzes data, and mobile SDK that sends this 
-data (for iOS, Android, Windows Phone and Blackberry). Both parts are open source.
+## About the SDK
+These versions of the SDK are released automatically from our private projects.
 
-This repository includes the SDK for iOS.
+## Installation
 
-##Installing iOS SDK
+It's super simple to begin using the SDK. In your Podfile (for example):
 
-Countly iOS SDK includes necessary tools to track your application. In order to integrate SDK to your application, follow these steps.
+    pod 'GeotriggerSDK', :podspec => "https://gist.github.com/mmassaki/f90906719b0b0c891d4d/raw/1a7a099ac16e70cda97cd5730bbeab7eeffbd672/GeotriggerSDK.podspec.json" #this is a fix since the GeotriggerSDK public podspec needs to change in order to be used as a dependency
+    pod 'TaqtileSDK', :git => "git@github.com:indigotech/shingle-analytics.git", :tag => "0.2.0" # this tag is an example
 
-1. Download Countly iOS SDK.
-2. Add these files to your project under Xcode: `Countly.h` `Countly.m` `Countly_OpenUDID.h` `Countly_OpenUDID.m`
-3. In the project navigator, select your project
-4. Select your project
-5. Select the **Build Phases** tab
-6. Open **Link Binaries With Libraries** expander
-7. Click the **+** button
-8. Select CoreTelephony.framework, select **Optional** (instead of Required)
-9. *(optional)* Drag and drop the added framework to the **Frameworks** group
-10. In your application delegate, import `Countly.h`
-and inside `application:didFinishLaunchingWithOptions:`  add the line;
-`[[Countly sharedInstance] start:@"YOUR_APP_KEY" withHost:@"http://YOUR_API_HOST.com"];` at the beginning of the function.
+for the pod `TaqtileSDK`, you may have the following options for branches and tags:
 
-**Note:** if you use Countly Cloud, you must set withHost parameter to http://cloud.count.ly for step 10.
+####  Tags
+    - 0.2.0 (stable)
+    - 0.2.0-beta (latest version)
 
-It should finally look like this:
+## Usage
 
-<pre class="prettyprint">
-#import "Countly.h"  // newly added line
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-[[Countly sharedInstance] start:@"TYPE_HERE_YOUR_APP_KEY_GENERATED_IN_COUNTLY_ADMIN_DASHBOARD" withHost:@"http://TYPE_HERE_URL_WHERE_API_IS_HOSTED"]; // newly added line
-// your code
-}
-</pre>
+For now, you can follow the implementation available at our example (SAExample) app. Each version comes with an example app with comments about it's implementation. To download a specific example, simply follow:
 
-Note: If your project uses automatic reference counting (ARC), you should disable it for the sources `Countly_OpenUDID.m` and `Countly.m`:
+    git clone git@github.com:indigotech/shingle-analytics.git --branch develop
 
-1. Select your project
-2. Select the **Build Phases** tab
-3. Open **Compile Sources** tab
-4. Double click `Countly.m` and `Countly_OpenUDID.m` and add `-fno-objc-arc` flag
+## Supported API versions (for this specific SDK)
 
-Note: Before upgrading to a new SDK, do not forget to remove the existing, older SDK from your project.
+  - 2.0
+  - 2.1
+  - 2.14
 
+## TODO
 
-Check Countly Server source code here: 
-
-- [Countly Server](https://github.com/Countly/countly-server)
-
-There are also other Countly SDK repositories below:
-
-- [Countly iOS SDK](https://github.com/Countly/countly-sdk-ios)
-- [Countly Android SDK](https://github.com/Countly/countly-sdk-android)
-- [Countly Windows Phone SDK](https://github.com/Countly/countly-sdk-windows-phone)
-- [Countly Blackberry Webworks SDK](https://github.com/Countly/countly-sdk-blackberry-webworks)
-
-##How can I help you with your efforts?
-Glad you asked. We need ideas, feedbacks and constructive comments. All your suggestions will be taken care with upmost importance. 
-
-We are on [Twitter](http://twitter.com/gocountly) and [Facebook](http://www.facebook.com/Countly) if you would like to keep up with our fast progress!
-
-For community support page, see [http://support.count.ly](http://support.count.ly "Countly Support").
+- Add tests
+- Add Continuous Integration (Travis)
