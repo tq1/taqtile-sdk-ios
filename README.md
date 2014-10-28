@@ -1,35 +1,71 @@
-iOS - SDK
-=========
+##How-to
 
-## About the SDK
-These versions of the SDK are released automatically from our private projects.
+Here it's described same methods and constants that have to be defined/implemented, others that are important and its' use in the app in general.
+The format used is:
+	
+	@ [class_name]:
+	- [methods_referenced]
 
-## Installation
+###Record events
 
-It's super simple to begin using the SDK. In your Podfile (for example):
+	@ TQAnalytics:
+	- (void)recordEvent:(NSString *)event count:(int)count;
+	- (void)recordEvent:(NSString *)event segmentation:(NSDictionary *)segmentation count:(int)count;
 
-    pod 'GeotriggerSDK', :podspec => "https://gist.github.com/mmassaki/f90906719b0b0c891d4d/raw/1a7a099ac16e70cda97cd5730bbeab7eeffbd672/GeotriggerSDK.podspec.json" #this is a fix since the GeotriggerSDK public podspec needs to change in order to be used as a dependency
-    pod 'TaqtileSDK', :git => "git@github.com:shingle/taqtile-sdk-ios.git", :tag => "0.2.0" # this tag is an example
+Used to record informations about the event, for example wich event happened, it's count, segmentation.
+The ones implemented must be those that register only count and the other that registers count and segmntation.
 
-for the pod `TaqtileSDK`, you may have the following options for branches and tags:
+Segmentaion is extra information about the event. In essence it can be anything.
 
-####  Tags
-    - 0.2.0 (stable)
-    - 0.2.0-beta (latest version)
+###Receive push notifications
 
-## Usage
+	@ TQ:
+	- (void)handleForegroundPushNotification:(NSDictionary *)userInfo pushId:(NSString *) pushId;
+	- (void)handleBackgroundPushNotification:(NSDictionary *)userInfo pushId:(NSString *) pushId;
 
-For now, you can follow the implementation available at our example (SAExample) app. Each version comes with an example app with comments about it's implementation. To download a specific example, simply follow:
+Both methods handle how the app behaves when a push hits the device. Normally, they'd describe the app being open and showing the the pushs or showing the new push
 
-    git clone git@github.com:indigotech/shingle-analytics.git --branch develop
+###Retrieve custom content
 
-## Supported API versions (for this specific SDK)
+	@ TQInbox:
+	-(void) retrieveCustomContent: (NSString*)pushId completion:(void (^)(BOOL success))completion;
 
-  - 2.0
-  - 2.1
-  - 2.14
+Each push is imbued with some extra content, which can be in the form of a tag, a link or simply a message.
+TQInbox, representing the push, calls retrieveCustomContent to get it's custom content that is not splicitly contained within itself, but only represented as an id to the real content.
+The params are pretty straightforward: the push's id and a completion block.
 
-## TODO
+###Start TQ
 
-- Add tests
-- Add Continuous Integration (Travis)
+	@ TQ:
+	- (void)start:(NSString *)appKey withHost:(NSString *)appHost;
+	- (void)start:(NSString *)appKey withHost:(NSString *)appHost andUDID: (NSString *)udid;
+
+Start a connection with the server.
+
+###Start Geotrigger Service
+	
+	@ TQGeotriggerService:
+	-(void)startGeotriggerService:(NSString *)clientId withTags:(NSArray *)tags;
+
+Usually called at the app start, it can be called to start the geotrigger service at any convenient time.
+
+###Constants
+
+	@ Constants:
+	#define SA_APP_HOST
+	#define SA_APP_KEY
+	#define ARCGIS_CLIENT_ID
+	#define DEFAULT_KEY_GEONOTIFICATIONS
+	#define DEFAULT_KEY_USER_NAME
+	#define DEFAULT_KEY_USER_EMAIL
+	#define DEFAULT_KEY_USER_IMAGE_URL
+	#define DEFAULT_TRACKING_PROFILE 
+	#define DEFAULT_DEVICE_TAGS
+
+All constants have to be defined for the app to work properly. Its' names should be all self-explanatory.
+
+###More
+
+ - [https://count.ly/resources/reference/features](https://count.ly/resources/reference/features)
+ - [https://github.com/Esri/geotrigger-sdk-ios](https://github.com/Esri/geotrigger-sdk-ios)
+ - [https://github.com/Esri/geotrigger-sdk-android](https://github.com/Esri/geotrigger-sdk-android)
