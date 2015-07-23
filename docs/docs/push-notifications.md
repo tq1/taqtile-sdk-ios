@@ -24,7 +24,7 @@ TQInboxMessage represents a push, holding all its informations, but by itself it
 
 ##TQInbox
 
-The TQInbox class is a representation of a push notification inbox and describes methods to manipulate said pushes, like: getting a certain push, marking pushes as read, deleting pushes from the inbox, etc.
+The TQInbox class is a representation of an push notification inbox and describes methods to manipulate said pushes, like: getting a certain push, marking pushes as read, deleting pushes from the inbox, etc.
 
 ```objectivec
 @interface TQInbox : NSObject
@@ -49,15 +49,13 @@ The TQInbox class is a representation of a push notification inbox and describes
 ```
 
 Just note that, since there should only exist one TQInbox per app, the correct way to call those methods is by sending the message to the 'shared' return. The 'shared' method will take care of creating an inbox or returning the existing one.
-
-```objectivec
+```
 //For example:
 [[TQInbox shared] getInboxMessage: @"1234"]
 ```
 
 Also, one should create a class that handles how the app behaves when a push is received by implementing the TQDelegate protocol, defined in TQ.h:
-
-```objectivec
+```
 @protocol TQDelegate <NSObject>
   - (void)handleForegroundPushNotification:(NSDictionary *)userInfo pushId:(NSString *) pushId;
   - (void)handleBackgroundPushNotification:(NSDictionary *)userInfo pushId:(NSString *) pushId;
@@ -67,8 +65,7 @@ Also, one should create a class that handles how the app behaves when a push is 
 ##Handling incoming pushes
 When the push first arrives, the app may or may not be open, in background, etc; so it's necessary to implement the protocol *TQDelegate* and the *didFinishLaunchingWithOptions* event that will determinate the actions to take in each state.
 In special, the TQProtocol will describe what happens when the app is open, and in its' implementation it will become necessary to get the received push (to display it, for example). In that case one should use the method *getInboxMessage* inside the protocol's implementation, since they do receive the received push's id:
-
-```objectivec
+```
 - (void)handleBackgroundPushNotification:(NSDictionary *)userInfo pushId:(NSString *) pushId
 {
     TQInboxMessage *receivedPush;
@@ -81,7 +78,6 @@ In special, the TQProtocol will describe what happens when the app is open, and 
 ##Handling all received pushes
 
 Now, when there are already received pushes in the inbox and it's necessary to show those, the natural thing to do should be to get all read/unread pushes, and to do that call *getInboxMessages* on the inbox. That method takes a status to do the filtering. The possible status are defined in an enum in the header, but here they are:
-
 ```objectivec
 typedef enum
 {
@@ -92,7 +88,6 @@ typedef enum
 ```
 
 And naturally, to get, let's say, unread pushes call *getInboxMessages*  with a TQInboxMessageStatusUnread parameter:
-
 ```objectivec
 [[TQInbox shared] getInboxMessages: TQInboxMessageStatusUnread]
 ```
@@ -117,8 +112,7 @@ The first of them is to mark a push as read or unread. So in the view controller
 if ([[TQInbox shared] markAsRead:pushId]){
   //The push was marked!
 }else{
-  //The push was not marked...
-}
+  //The push was not marked...\n}
 ```
 
 The second is to delete the push. It deletes the push from the database:
