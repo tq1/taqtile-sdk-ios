@@ -32,6 +32,16 @@
  */
 + (NSString *)osVersion;
 
+/** platform
+ * @return device's platform
+ */
++ (NSString *)platform;
+
+/** platformVersion
+ * @return device's platform's version
+ */
++ (NSString *)platformVersion;
+
 /** carrier
  * @return device's carrier (Claro, Tim, etc)
  */
@@ -50,12 +60,12 @@
 /** locationEnabled
  * @return wether the user's given permission for location services
  */
-+ (NSString *)locationEnabled;
++ (BOOL)locationEnabled;
 
 /** pushEnabled
  * @return wether the user's given permission for push services
  */
-+ (NSString *)pushEnabled;
++ (BOOL)pushEnabled;
 
 /** metrics
  * @return a string formatted in a hash-fashion (@"{key: value}", for example) for the metrics: device, osVersion, carrier, resoution, locale, and 
