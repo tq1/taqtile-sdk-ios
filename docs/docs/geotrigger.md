@@ -3,7 +3,7 @@
 Not much to it, just start the geotrigger manager so it's possible for the user to receive pushes from the geofences:
 
 ```objectivec
-[[TQGeotrigger shared] startGeotriggerService:GEOTRIGGER_CLIENT_ID withTags:DEFAULT_DEVICE_TAGS];
+[[TQ1Geotrigger shared] startGeotriggerService:GEOTRIGGER_CLIENT_ID withTags:DEFAULT_DEVICE_TAGS];
 ```
 
 Where:
@@ -14,7 +14,7 @@ Where:
 And to stop it:
 
 ```
-[[TQGeotrigger shared] stopGeotriggerService:ARCGIS_CLIENT_ID withTags:DEFAULT_DEVICE_TAGS];
+[[TQ1Geotrigger shared] stopGeotriggerService:ARCGIS_CLIENT_ID withTags:DEFAULT_DEVICE_TAGS];
 ```
 
 ##Getting app geofences
@@ -22,7 +22,7 @@ And to stop it:
 In order to get all geofences that are registered for the application on TQ1 server, you use:
 
 ```objectivec
-[[TQGeotrigger shared] requestGeofences:0 completion:^(NSArray *data)
+[[TQ1Geotrigger shared] requestGeofences:0 completion:^(NSArray *data)
 {
   //Your method here
 }];

@@ -1,20 +1,20 @@
 ##Classes
 
-Basically there are two classes that handle push notifications: TQInbox and TQInboxMessage, both described in 'TQInbox.h'.
+Basically there are two classes that handle push notifications: TQ1Inbox and TQ1InboxMessage, both described in 'TQ1Inbox.h'.
 
-###TQInboxMessage
+###TQ1InboxMessage
 
-TQInboxMessage represents a push, holding all its informations, but by itself it can't do anything.
+TQ1InboxMessage represents a push, holding all its informations, but by itself it can't do anything.
 
 ```objectivec
-@interface TQInboxMessage : NSObject
--(id)initWithPushId: (NSString *)id alert:(NSString *)alert content:(id)content type:(TQInboxMessageType)type status:(TQInboxMessageStatus)status complete:(BOOL)complete timestamp: (int) timestamp;
+@interface TQ1InboxMessage : NSObject
+-(id)initWithPushId: (NSString *)id alert:(NSString *)alert content:(id)content type:(TQ1InboxMessageType)type status:(TQ1InboxMessageStatus)status complete:(BOOL)complete timestamp: (int) timestamp;
 
 @property(readonly) NSString *id;
 @property(readonly) NSString *alert;
 @property(readonly) id content;
-@property(readonly) TQInboxMessageType type;
-@property(readonly) TQInboxMessageStatus status;
+@property(readonly) TQ1InboxMessageType type;
+@property(readonly) TQ1InboxMessageStatus status;
 @property(readonly) BOOL complete;
 @property(readonly) int timestamp;
 @property(readonly) NSString fenceId;
@@ -22,22 +22,22 @@ TQInboxMessage represents a push, holding all its informations, but by itself it
 @end
 ```
 
-##TQInbox
+##TQ1Inbox
 
-The TQInbox class is a representation of a push notification inbox and describes methods to manipulate said pushes, like: getting a certain push, marking pushes as read, deleting pushes from the inbox, etc.
+The TQ1Inbox class is a representation of a push notification inbox and describes methods to manipulate said pushes, like: getting a certain push, marking pushes as read, deleting pushes from the inbox, etc.
 
 ```objectivec
-@interface TQInbox : NSObject
-  +(TQInbox *)shared;
+@interface TQ1Inbox : NSObject
+  +(TQ1Inbox *)shared;
   -(BOOL) addAlert: (NSString *)pushId alert:(NSString *) alert;
 
-  -(void) retrieveCustomContent: (NSString*)pushId completion:(void (^)(BOOL success, TQInboxMessage *message))completion;
+  -(void) retrieveCustomContent: (NSString*)pushId completion:(void (^)(BOOL success, TQ1InboxMessage *message))completion;
 
-  -(NSArray *)getInboxMessages:(TQInboxMessageStatus) status;
+  -(NSArray *)getInboxMessages:(TQ1InboxMessageStatus) status;
 
-  -(TQInboxMessage *) getInboxMessage:(NSString *)pushId;
+  -(TQ1InboxMessage *) getInboxMessage:(NSString *)pushId;
 
-  -(int)getInboxMessagesCount:(TQInboxMessageStatus) status;
+  -(int)getInboxMessagesCount:(TQ1InboxMessageStatus) status;
 
   -(BOOL) markAsRead:(NSString *)pushId;
 
@@ -48,14 +48,14 @@ The TQInbox class is a representation of a push notification inbox and describes
 @end
 ```
 
-Just note that, since there should only exist one TQInbox per app, the correct way to call those methods is by sending the message to the 'shared' return. The 'shared' method will take care of creating an inbox or returning the existing one.
+Just note that, since there should only exist one TQ1Inbox per app, the correct way to call those methods is by sending the message to the 'shared' return. The 'shared' method will take care of creating an inbox or returning the existing one.
 
 ```objectivec
 //For example:
-[[TQInbox shared] getInboxMessage: @"1234"]
+[[TQ1Inbox shared] getInboxMessage: @"1234"]
 ```
 
-Also, one should create a class that handles how the app behaves when a push is received by implementing the TQDelegate protocol, defined in TQ.h:
+Also, one should create a class that handles how the app behaves when a push is received by implementing the TQDelegate protocol, defined in TQ1.h:
 
 ```objectivec
 @protocol TQDelegate <NSObject>
@@ -71,9 +71,9 @@ In special, the TQProtocol will describe what happens when the app is open, and 
 ```objectivec
 - (void)handleBackgroundPushNotification:(NSDictionary *)userInfo pushId:(NSString *) pushId
 {
-    TQInboxMessage *receivedPush;
+    TQ1InboxMessage *receivedPush;
     //Code
-    receivedPush = [[[TQInbox] shared] getInboxMessage: pushId];
+    receivedPush = [[[TQ1Inbox] shared] getInboxMessage: pushId];
     //More code
 }
 ```
@@ -85,24 +85,24 @@ Now, when there are already received pushes in the inbox and it's necessary to s
 ```objectivec
 typedef enum
 {
-  TQInboxMessageStatusUnread,
-  TQInboxMessageStatusRead,
-  TQInboxMessageStatusAll
-} TQInboxMessageStatus;
+  TQ1InboxMessageStatusUnread,
+  TQ1InboxMessageStatusRead,
+  TQ1InboxMessageStatusAll
+} TQ1InboxMessageStatus;
 ```
 
-And naturally, to get, let's say, unread pushes call *getInboxMessages*  with a TQInboxMessageStatusUnread parameter:
+And naturally, to get, let's say, unread pushes call *getInboxMessages*  with a TQ1InboxMessageStatusUnread parameter:
 
 ```objectivec
-[[TQInbox shared] getInboxMessages: TQInboxMessageStatusUnread]
+[[TQ1Inbox shared] getInboxMessages: TQ1InboxMessageStatusUnread]
 ```
 
-And if you need the read pushes use TQInboxMessageStatusRead as the parameter, and to get all use the TQInboxMessageStatusAll parameter.
+And if you need the read pushes use TQ1InboxMessageStatusRead as the parameter, and to get all use the TQ1InboxMessageStatusAll parameter.
 
 But if it's only necessary to get how many pushes there are in the inbox, there is no necessity to get all the pushes and then count them. In this case simply call *getInboxMessagesCount*. It's faster, it's better, it's cleaner. The method receives the same type of parameter as *getInboxMessages*:
 
 ```objectivec
-[[TQInbox shared] getInboxMessagesCount: TQInboxMessageStatusUnread]
+[[TQ1Inbox shared] getInboxMessagesCount: TQ1InboxMessageStatusUnread]
 ```
 
 Be warned, though, that this returns an "int", not an "NSInteger" nor an "NSNumber".
@@ -114,7 +114,7 @@ There's just a few things to do with a single push.
 The first of them is to mark a push as read or unread. So in the view controller, there should be some code as:
 
 ```objectivec
-if ([[TQInbox shared] markAsRead:pushId]){
+if ([[TQ1Inbox shared] markAsRead:pushId]){
   //The push was marked!
 }else{
   //The push was not marked...
@@ -124,7 +124,7 @@ if ([[TQInbox shared] markAsRead:pushId]){
 The second is to delete the push. It deletes the push from the database:
 
 ```objectivec
-if ([[TQInbox shared] removeMessage:pushId]){
+if ([[TQ1Inbox shared] removeMessage:pushId]){
   //The push was deleted!
 }else{
   //The push was not deleted...
@@ -134,20 +134,20 @@ if ([[TQInbox shared] removeMessage:pushId]){
 And the third is to retrieve the pushes content. Since pushes and its' contents are not in the same table, it's necessary to retrieve it through the push:
 
 ```objectivec
-[[TQInbox shared] retrieveCustomContent:pushId completion:^(BOOL success, TQInboxMessage *message)
+[[TQ1Inbox shared] retrieveCustomContent:pushId completion:^(BOOL success, TQ1InboxMessage *message)
 ```
 
-The first parameter is the push's id and the second is a block that receives if it was possible to retrieve the content and the TQInboxMessage with the retrieved content.
+The first parameter is the push's id and the second is a block that receives if it was possible to retrieve the content and the TQ1InboxMessage with the retrieved content.
 
 You can also tell the SDK to download the content as soon as the notification arrives via the method call:
 ```objectivec
-[[TQPush shared] setDownloadAutomatic: true]
+[[TQ1Push shared] setDownloadAutomatic: true]
 ```
 
 Keep in mind that this is only possible when the application is currently running in background. When the user clicks on the notification, you can check whether the content was already downloaded or not by verifying the `complete` field. In the latter case the content should be requested:
 
 ```objectivec
-TQInboxMessage *notification;
+TQ1InboxMessage *notification;
 if(!notification.complete)
 {
   // Request content HERE
@@ -156,8 +156,8 @@ if(!notification.complete)
 
 ##Removing Multiple Notifications
 
-There is a method available for removing all notifications specified by its `TQInboxMessageStatus`: *READ*, *UNREAD* or *ALL*.
+There is a method available for removing all notifications specified by its `TQ1InboxMessageStatus`: *READ*, *UNREAD* or *ALL*.
 
 ```objectivec
-[[TQInbox shared] removeMessagesWithStatus: TQInboxMessageStatusAll]
+[[TQ1Inbox shared] removeMessagesWithStatus: TQ1InboxMessageStatusAll]
 ```
