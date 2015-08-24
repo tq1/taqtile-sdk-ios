@@ -9,13 +9,13 @@
  
  Pod::Spec.new do |s|
  s.name = "TaqtileSDK"
- s.version = "test3.0.8-no-tracking"
- s.summary = "Library TaqtileSDK to implement TQ1 on projects"
+ s.version = "test3.0.8-esri"
+ s.summary = "Library TaqtileSDK to implement shingle on projects"
  
  s.homepage = "https://github.com/tq1/taqtile-sdk-ios"
  s.license = { :type => 'Comercial'}
  s.author = { "Taqtile" => "felipe.sabino@taqtile.com" }
- s.source = { :git => "git@github.com:tq1/br-tq1-ios.git", :tag => "test3.0.8-no-tracking" }
+ s.source = { :git => "git@github.com:tq1/br-tq1-ios.git", :tag => "test3.0.8-esri" }
  
  s.platform = :ios, '8.0'
  s.requires_arc = true
@@ -24,4 +24,8 @@
  
  s.library = 'TaqtileSDK'
  s.library = 'sqlite3'
+ 
+ #s.framework = 'GeotriggerSDK'
+ s.xcconfig = { 'FRAMEWORK_SEARCH_PATHS' => "$(PODS_ROOT)/GeotriggerSDK" , 'OTHER_LDFLAGS' => '-framework GeotriggerSDK', 'LIBRARY_SEARCH_PATHS' => '$(PODS_ROOT)/TaqtileSDK'}
+ s.dependency 'GeotriggerSDK'
  end
