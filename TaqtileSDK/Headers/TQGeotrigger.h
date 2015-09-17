@@ -57,6 +57,16 @@
  */
 +(NSString *)trackingId;
 
+/** geonotificationActive
+ *  set if geonotifications should be started according to user preferences
+ */
+-(void)geonotificationActive:(BOOL)geoNotification;
+
+/** isGeonotificationActive
+ *  return true is geonotifications are active and false otherwise
+ */
+-(BOOL)isGeonotificationActive;
+
 /** requestGeofences
  *  gets all app Geofences
  *
