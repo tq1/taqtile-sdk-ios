@@ -77,16 +77,6 @@
 */
 -(void)updateSettings;
 
-/** isPushEnabled
- *   Returns true if push enabled or false otherwise.
- */
--(BOOL)isPushEnabled;
-
-/** updateSettingsWithPushEnabled
- *   Set user preferences ("push enabled") to api in order to update them.
- */
--(void)updateSettingsWithPushEnabled:(BOOL)pushEnabled;
-
 ///////////////////////////////////////////////////////////////////////////
 /// @name Custom status
 ///////////////////////////////////////////////////////////////////////////

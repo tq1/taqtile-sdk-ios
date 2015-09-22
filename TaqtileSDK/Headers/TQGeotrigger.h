@@ -7,21 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@protocol TQGeoTriggerDelegate <NSObject>
-@required
-- (void)configure:(void (^)(void))completion;
-- (void)start;
-- (void)stop;
-- (void)resume;
-- (void)pause;
-- (NSString *)getDeviceId;
-@end
+#import <GeotriggerSDK/GeotriggerSDK.h>
 
 /** TQGeotrigger
  *  Simply commands when to start and when to stop the geotrigger service
  */
-@interface TQGeotrigger: NSObject
+@interface TQGeotrigger : NSObject
 /** shared
  *  Return an instance of itself, initializating it if there is no TQGeotrigger object. Since it's an shared object, it'll only create one.
  *
@@ -29,44 +20,48 @@
  */
 +(TQGeotrigger *) shared;
 
-- (void)setManager: (id<TQGeoTriggerDelegate>)manager;
-
-/** startGeotriggerService
+/** startGeotriggerService clientId withTags
  *  Starts the geotrigger service
+ *
+ * @param clientID: the client ID
+ * @param tags: An optional list of tags to be set on the device after it registers itself
+ * @see https://developers.arcgis.com/geotrigger-service/ios-reference/Classes/AGSGTGeotriggerManager.html#//api/name/setupWithClientId:trackingProfile:registerForRemoteNotifications:isProduction:tags:completion:
  */
-- (void)startGeotriggerService;
+-(void)startGeotriggerService:(NSString *)clientId withTags:(NSArray *)tags;
 
-/** stopGeotriggerService
+/** stopGeotriggerService clientId withTags
  *  Stops the geotrigger service
+ *
+ * @param clientID: the client ID
+ * @param tags: An optional list of tags to be set on the device after it stops
  */
-- (void)stopGeotriggerService;
+-(void)stopGeotriggerService:(NSString *)clientId withTags:(NSArray *)tags;
 
 
 /** resumeGeotriggerService
  *  Starts the geotrigger service
- */
+ *
+  */
 - (void)resumeGeotriggerService;
 
 /** pauseGeotriggerService
  *  Stops the geotrigger service on iOS 8+ for the cases when location usage is only authorized when app is being used
+ *
  */
-- (void)pauseGeotriggerService;
+-(void)pauseGeotriggerService;
 
-/** geonotificationActive
- *  set if geonotifications should be started according to user preferences
+/** trackingId
+ *  gets the registered track id to the device
+ *
+ * @return a string representing the track id
  */
--(void)geonotificationActive:(BOOL)geoNotification;
-
-/** isGeonotificationActive
- *  return true is geonotifications are active and false otherwise
- */
--(BOOL)isGeonotificationActive;
++(NSString *)trackingId;
 
 /** requestGeofences
  *  gets all app Geofences
  *
- *  @returns an Geofences array
+ * @returns an Geofences array
  */
-- (void)requestGeofences:(int) page completion:(void (^)(NSArray *data))completion;
+-(void) requestGeofences:(int) page completion:(void (^)(NSArray *data))completion;
 
 @end
