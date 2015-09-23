@@ -22,7 +22,7 @@ typedef enum
 	TQ1InboxMessageStatusUnread,
 	TQ1InboxMessageStatusRead,
 	TQ1InboxMessageStatusAll
-	
+
 } TQ1InboxMessageStatus;
 
 

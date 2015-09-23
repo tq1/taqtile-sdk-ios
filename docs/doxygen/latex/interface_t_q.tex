@@ -1,0 +1,199 @@
+\hypertarget{interface_t_q}{}\section{T\+Q Class Reference}
+\label{interface_t_q}\index{T\+Q@{T\+Q}}
+
+
+{\ttfamily \#import $<$T\+Q.\+h$>$}
+
+Inheritance diagram for T\+Q\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{interface_t_q}
+\end{center}
+\end{figure}
+\subsection*{methods}
+\begin{DoxyCompactItemize}
+\item 
+(\hyperlink{interface_t_q}{T\+Q} $\ast$) + \hyperlink{interface_t_q_a1eb13d05ac49bd6f39b5911b5290d147}{shared}
+\item 
+(N\+S\+String $\ast$) + \hyperlink{interface_t_q_a7d961d9f8f099fe554e99ef031b343b2}{app\+Key}
+\item 
+(N\+S\+String $\ast$) + \hyperlink{interface_t_q_ada9fbe4802e78b64975d51b746372665}{app\+Host}
+\item 
+(N\+S\+String $\ast$) + \hyperlink{interface_t_q_a1406ee198a5c9dcb87185b1b20e05269}{udid}
+\item 
+(N\+S\+String $\ast$) + \hyperlink{interface_t_q_a0a7336302a6134c1cdd67bc47e77a99f}{api\+Version}
+\item 
+(void) -\/ \hyperlink{interface_t_q_aff2f7801e1031105398e0deeae120ff3}{register\+For\+Remote\+Notification\+Types\+:delegate\+:}
+\item 
+(void) -\/ \hyperlink{interface_t_q_acbc578f00021d086d13947bf8f47723c}{set\+Push\+Content\+Dowload\+Automatic\+:}
+\item 
+(void) -\/ \hyperlink{interface_t_q_abf6c567f6548e43a77fea42da2da908b}{track\+Remote\+Nofitications\+:}
+\item 
+(void) -\/ \hyperlink{interface_t_q_a8cf7c68571dec41bfea63b3052745abf}{start\+With\+Key\+:and\+Environment\+:}
+\item 
+\hypertarget{interface_t_q_ab70ac313e849539d3f7a726618f7ee55}{}(void) -\/ {\bfseries stop}\label{interface_t_q_ab70ac313e849539d3f7a726618f7ee55}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{interface_t_q}{T\+Q} Holds information about the device and the app. Also, handle the initial configuration. 
+
+\subsection{Method Documentation}
+\hypertarget{interface_t_q_a0a7336302a6134c1cdd67bc47e77a99f}{}\index{T\+Q@{T\+Q}!api\+Version@{api\+Version}}
+\index{api\+Version@{api\+Version}!T\+Q@{T\+Q}}
+\subsubsection[{api\+Version()}]{\setlength{\rightskip}{0pt plus 5cm}+ (N\+S\+String $\ast$) api\+Version 
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+}\label{interface_t_q_a0a7336302a6134c1cdd67bc47e77a99f}
+api\+Version
+
+Returns the server\textquotesingle{}s A\+P\+I version.
+
+\begin{DoxyReturn}{Returns}
+the server api version. 
+\end{DoxyReturn}
+\hypertarget{interface_t_q_ada9fbe4802e78b64975d51b746372665}{}\index{T\+Q@{T\+Q}!app\+Host@{app\+Host}}
+\index{app\+Host@{app\+Host}!T\+Q@{T\+Q}}
+\subsubsection[{app\+Host()}]{\setlength{\rightskip}{0pt plus 5cm}+ (N\+S\+String $\ast$) app\+Host 
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+}\label{interface_t_q_ada9fbe4802e78b64975d51b746372665}
+app\+Host
+
+Returns the host of the application the app is related to.
+
+\begin{DoxyReturn}{Returns}
+host name in a string format 
+\end{DoxyReturn}
+\hypertarget{interface_t_q_a7d961d9f8f099fe554e99ef031b343b2}{}\index{T\+Q@{T\+Q}!app\+Key@{app\+Key}}
+\index{app\+Key@{app\+Key}!T\+Q@{T\+Q}}
+\subsubsection[{app\+Key()}]{\setlength{\rightskip}{0pt plus 5cm}+ (N\+S\+String $\ast$) app\+Key 
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+}\label{interface_t_q_a7d961d9f8f099fe554e99ef031b343b2}
+app\+Key
+
+Returns the app\+Key of the application the app is related to.
+
+\begin{DoxyReturn}{Returns}
+an string representing the app\+Key 
+\end{DoxyReturn}
+\hypertarget{interface_t_q_aff2f7801e1031105398e0deeae120ff3}{}\index{T\+Q@{T\+Q}!register\+For\+Remote\+Notification\+Types\+:delegate\+:@{register\+For\+Remote\+Notification\+Types\+:delegate\+:}}
+\index{register\+For\+Remote\+Notification\+Types\+:delegate\+:@{register\+For\+Remote\+Notification\+Types\+:delegate\+:}!T\+Q@{T\+Q}}
+\subsubsection[{register\+For\+Remote\+Notification\+Types\+:delegate\+:(int types,[delegate] id$<$ T\+Q\+Delegate $>$ delegate)}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) register\+For\+Remote\+Notification\+Types\+: 
+\begin{DoxyParamCaption}
+\item[{(int)}]{types}
+\item[{delegate:(id$<${\bf T\+Q\+Delegate}$>$)}]{delegate}
+\end{DoxyParamCaption}
+}\label{interface_t_q_aff2f7801e1031105398e0deeae120ff3}
+register\+For\+Remote\+Notification\+Types delegate
+
+Register the device to push notifications of the specified type
+
+
+\begin{DoxyParams}{Parameters}
+{\em types} & constant indicating the push type \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\href{https://developer.apple.com/library/ios/documentation/uikit/reference/UIApplication_Class/index.html#//apple_ref/c/tdef/UIRemoteNotificationType}{\tt https\+://developer.\+apple.\+com/library/ios/documentation/uikit/reference/\+U\+I\+Application\+\_\+\+Class/index.\+html\#//apple\+\_\+ref/c/tdef/\+U\+I\+Remote\+Notification\+Type} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em delegate} & any object that implements the \hyperlink{protocol_t_q_delegate-p}{T\+Q\+Delegate} protocol.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+this method sends \char`\"{}track\+Remote\+Notifications\char`\"{} to \hyperlink{interface_t_q}{T\+Q}. See track\+Remote\+Notifications\textquotesingle{} warnings for more information 
+\end{DoxyWarning}
+\hypertarget{interface_t_q_acbc578f00021d086d13947bf8f47723c}{}\index{T\+Q@{T\+Q}!set\+Push\+Content\+Dowload\+Automatic\+:@{set\+Push\+Content\+Dowload\+Automatic\+:}}
+\index{set\+Push\+Content\+Dowload\+Automatic\+:@{set\+Push\+Content\+Dowload\+Automatic\+:}!T\+Q@{T\+Q}}
+\subsubsection[{set\+Push\+Content\+Dowload\+Automatic\+:(\+B\+O\+O\+L automatic)}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) set\+Push\+Content\+Dowload\+Automatic\+: 
+\begin{DoxyParamCaption}
+\item[{(B\+O\+O\+L)}]{automatic}
+\end{DoxyParamCaption}
+}\label{interface_t_q_acbc578f00021d086d13947bf8f47723c}
+
+\begin{DoxyParams}{Parameters}
+{\em automatic} & when this flag is set to true, as soon as a remote notification arrives (considering app running in background), the content is downloaded and stored in local database. When false, the application is responsible for downloading this content when the user clicks on the message. \\
+\hline
+\end{DoxyParams}
+\hypertarget{interface_t_q_a1eb13d05ac49bd6f39b5911b5290d147}{}\index{T\+Q@{T\+Q}!shared@{shared}}
+\index{shared@{shared}!T\+Q@{T\+Q}}
+\subsubsection[{shared()}]{\setlength{\rightskip}{0pt plus 5cm}+ ({\bf T\+Q} $\ast$) shared 
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+}\label{interface_t_q_a1eb13d05ac49bd6f39b5911b5290d147}
+shared Return an instance of itself, initializating it if there is no \hyperlink{interface_t_q}{T\+Q} object. Since it\textquotesingle{}s an shared object, it\textquotesingle{}ll only create one.
+
+\begin{DoxyReturn}{Returns}
+a \hyperlink{interface_t_q}{T\+Q} object 
+\end{DoxyReturn}
+\hypertarget{interface_t_q_a8cf7c68571dec41bfea63b3052745abf}{}\index{T\+Q@{T\+Q}!start\+With\+Key\+:and\+Environment\+:@{start\+With\+Key\+:and\+Environment\+:}}
+\index{start\+With\+Key\+:and\+Environment\+:@{start\+With\+Key\+:and\+Environment\+:}!T\+Q@{T\+Q}}
+\subsubsection[{start\+With\+Key\+:and\+Environment\+:(\+N\+S\+String $\ast$key,[and\+Environment] T\+Q\+Environment environment)}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) start\+With\+Key\+: 
+\begin{DoxyParamCaption}
+\item[{(N\+S\+String $\ast$)}]{key}
+\item[{andEnvironment:(T\+Q\+Environment)}]{environment}
+\end{DoxyParamCaption}
+}\label{interface_t_q_a8cf7c68571dec41bfea63b3052745abf}
+start with\+Host and\+U\+D\+I\+D
+
+Initial configuration for receiving push notifications.
+
+
+\begin{DoxyParams}{Parameters}
+{\em app\+Key} & the application\textquotesingle{}s appkey in string format \\
+\hline
+{\em udid} & the device\textquotesingle{}s udid in string format \\
+\hline
+{\em app\+Host} & the application\textquotesingle{}s host in string format \\
+\hline
+{\em api\+Version} & the server\textquotesingle{}s api version in string format\\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+Not triggered if it is not in foreground 
+\end{DoxyWarning}
+\hypertarget{interface_t_q_abf6c567f6548e43a77fea42da2da908b}{}\index{T\+Q@{T\+Q}!track\+Remote\+Nofitications\+:@{track\+Remote\+Nofitications\+:}}
+\index{track\+Remote\+Nofitications\+:@{track\+Remote\+Nofitications\+:}!T\+Q@{T\+Q}}
+\subsubsection[{track\+Remote\+Nofitications\+:(id$<$ T\+Q\+Delegate $>$ delegate)}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) track\+Remote\+Nofitications\+: 
+\begin{DoxyParamCaption}
+\item[{(id$<${\bf T\+Q\+Delegate}$>$)}]{delegate}
+\end{DoxyParamCaption}
+}\label{interface_t_q_abf6c567f6548e43a77fea42da2da908b}
+track\+Remote\+Nofitications
+
+
+\begin{DoxyParams}{Parameters}
+{\em delegate} & any object that implements the \hyperlink{protocol_t_q_delegate-p}{T\+Q\+Delegate} protocol.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+sending this message to \hyperlink{interface_t_q}{T\+Q} will substitute the given param with something else, and it\textquotesingle{}s important to call this method before sending any messages to the given delegate so the app works. 
+\end{DoxyWarning}
+\hypertarget{interface_t_q_a1406ee198a5c9dcb87185b1b20e05269}{}\index{T\+Q@{T\+Q}!udid@{udid}}
+\index{udid@{udid}!T\+Q@{T\+Q}}
+\subsubsection[{udid()}]{\setlength{\rightskip}{0pt plus 5cm}+ (N\+S\+String $\ast$) udid 
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+}\label{interface_t_q_a1406ee198a5c9dcb87185b1b20e05269}
+udid
+
+Returns the \textquotesingle{}unique device id\textquotesingle{} of the device.
+
+\begin{DoxyReturn}{Returns}
+the device udid. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+T\+Q.\+h\item 
+T\+Q.\+m\end{DoxyCompactItemize}

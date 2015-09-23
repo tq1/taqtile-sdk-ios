@@ -8,11 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
-#define TQ_PLATFORM "ios"
-#define TQ_SDK_VERSION @"3.0"
-#define TQ_API_VERSION @"v3"
+#define TQ1_PLATFORM "ios"
+#define TQ1_SDK_VERSION @"3.0"
+#define TQ1_API_VERSION @"v3"
 
-@protocol TQDelegate <NSObject>
+typedef NS_ENUM(NSInteger, TQ1Environment) {
+    Production,
+    Staging,
+    QA,
+    Development
+};
+
+@protocol TQ1Delegate <NSObject>
 - (void)handleForegroundPushNotification:(NSDictionary *)userInfo pushId:(NSString *) pushId;
 - (void)handleBackgroundPushNotification:(NSDictionary *)userInfo pushId:(NSString *) pushId;
 - (void)handleCustomActionWithIdentifier:(NSString *)identifier pushId:(NSString *)pushId;
@@ -21,7 +28,7 @@
 /** TQ
  *  Holds information about the device and the app. Also, handle the initial configuration.
  */
-@interface TQ : NSObject
+@interface TQ1 : NSObject
 
 ///////////////////////////////////////////////////////////////////////////
 /// @name methods
@@ -31,7 +38,7 @@
  * 
  * @return a TQ object
  */
-+ (TQ *) shared;
++ (TQ1 *) shared;
 
 /** appKey
  *  
@@ -75,7 +82,7 @@
  *
  * @warning this method sends "trackRemoteNotifications" to TQ. See trackRemoteNotifications' warnings for more information
  */
-- (void)registerForRemoteNotificationTypes: (int) types delegate:(id<TQDelegate>)delegate;
+- (void)registerForRemoteNotificationTypes: (int) types delegate:(id<TQ1Delegate>)delegate;
 
 /**
  * @param automatic: when this flag is set to true, as soon as a remote notification arrives (considering app running in background), the content is downloaded and
@@ -89,7 +96,7 @@
  *
  * @warning sending this message to TQ will substitute the given param with something else, and it's important to call this method before sending any messages to the given delegate so the app works.
  */
-- (void)trackRemoteNofitications:(id<TQDelegate>)delegate;
+- (void)trackRemoteNofitications:(id<TQ1Delegate>)delegate;
 
 /** start withHost andUDID
  *
@@ -102,7 +109,6 @@
  *
  * @warning Not triggered if it is not in foreground
  */
-- (void)start:(NSString *)appKey withHost:(NSString *)appHost;
-- (void)start:(NSString *)appKey withHost:(NSString *)appHost andUDID: (NSString *)udid;
+- (void)startWithKey:(NSString *)key andEnvironment:(TQ1Environment)environment;
 - (void)stop;
 @end
