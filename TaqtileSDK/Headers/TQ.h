@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 
 #define TQ_PLATFORM "ios"
-#define TQ_SDK_VERSION @"3.0"
-#define TQ_API_VERSION @"v3"
 
 @protocol TQDelegate <NSObject>
 - (void)handleForegroundPushNotification:(NSDictionary *)userInfo pushId:(NSString *) pushId;
@@ -57,14 +55,6 @@
  */
 + (NSString *)udid;
 
-/** apiVersion
- *
- * Returns the server's API version.
- *
- * @return the server api version.
- */
-+ (NSString *)apiVersion;
-
 /** registerForRemoteNotificationTypes delegate
  *
  * Register the device to push notifications of the specified type
@@ -98,7 +88,6 @@
  * @param appKey: the application's appkey in string format
  * @param udid: the device's udid in string format
  * @param appHost: the application's host in string format
- * @param apiVersion: the server's api version in string format
  *
  * @warning Not triggered if it is not in foreground
  */
