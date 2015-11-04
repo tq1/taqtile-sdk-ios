@@ -13,7 +13,7 @@ All you have to do is include the pod in your application's podfile:
 source 'https://github.com/indigotech/Specs.git'
 
 target "yourTargetName" do
-  pod 'TQ1SDK'
+  pod 'TaqtileSDK'
 end
 ```
 run *pod install* in your application and there you go.

@@ -9,13 +9,13 @@
  
  Pod::Spec.new do |s|
  s.name = "TaqtileSDK"
- s.version = "2.8.2-inmarket"
+ s.version = "2.8.2"
  s.summary = "Library TaqtileSDK to implement shingle on projects"
  
  s.homepage = "https://github.com/tq1/taqtile-sdk-ios"
  s.license = { :type => 'Comercial'}
  s.author = { "Taqtile" => "felipe.sabino@taqtile.com" }
- s.source = { :git => "git@github.com:tq1/br-tq1-ios.git", :tag => "2.8.2-inmarket" }
+ s.source = { :git => "git@github.com:tq1/br-tq1-ios.git", :tag => "2.8.2" }
  
  s.platform = :ios
  s.requires_arc = true
