@@ -8,7 +8,6 @@ Remember that you should not have a dependency on the GeotriggerSDK, as it might
 
 If your application uses pods, this step is easy.
 All you have to do is include the pod in your application's podfile:
-
 ```ruby
 source 'https://github.com/indigotech/Specs.git'
 
@@ -20,8 +19,10 @@ run *pod install* in your application and there you go.
 
 ##Other options
 
-Clone the project (or download as zip) from git@github.com:tq1/taqtile-sdk-ios.git to your  project's path, import the headers inside the 'headers' folder and link your project's binary to the library.
+Clone the project (or download as zip) from git@github.com:shingle/taqtile-sdk-ios.git to your  project's path, import the headers inside the 'headers' folder and link your project's binary to the library.
 To do that last part, select your project's target -> Build Phases tab -> drag and drop libTaqtile.SDK.a to 'Link binary to libraries'.
+
+The last version of the GeotriggerSDK will still be mandatory in order to receive geo notifications and you can follow the geotrigger manual to configure the Geotrigger without a podfile following this link https://developers.arcgis.com/geotrigger-service/guide/ios-getting-started/#manual-setup
 
 ##Configuring it
 To make possible for the user to receive pushes, first it's necessary to make some configuration. To do it, set the TQ's required configurations:
@@ -60,11 +61,3 @@ And before ending this section, two little warnings:
   - ideally *trackRemoteNofitications* should be run at the start of *didFinishLaunching* so the sdk can receive the necessary messages.
 
   - after running the above, the application's delegate will be replaced with another delegate at runtime, so it'll not be possible to access it the normal way. But all the messages passed to the new delegate will reach your delegate, so don't worry.
-
-##iOS 9 (beta) Considerations
-
-  - Use Xcode `6.4`
-
-  - Geotrigger SDK 1.1.0 may behave oddly and not trigger (works on already installed apps though)
-
-  - When using Xcode 7, it will force you to use https, so it won't work the way it's implemented today. What can be done is to add an exception. See the [this link](http://ste.vn/2015/06/10/configuring-app-transport-security-ios-9-osx-10-11/)

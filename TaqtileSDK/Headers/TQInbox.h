@@ -44,14 +44,13 @@ typedef enum
  * @param status: the referenced push's status (see enum defined)
  * @param complete: the referenced push's complete parameter
  * @param timestamp: the referenced push's timestamp
- * @param scheduled: moment that the notification was scheduled at
  * @param customSentStatus: the referenced push's custom status
  * @param customAction: the referenced push's custom status
  *
  * @return
  *
  */
--(id)initWithPushId: (NSString *)id fenceId:(NSString *)fenceId alert:(NSString *)alert content:(NSString *)content type:(TQInboxMessageType)type status:(TQInboxMessageStatus)status complete:(BOOL)complete timestamp: (int) timestamp scheduled:(int)scheduled customStatus:(NSString *)customStatus customAction:(NSString *)customAction;
+-(id)initWithPushId: (NSString *)id fenceId:(NSString *)fenceId alert:(NSString *)alert content:(NSString *)content type:(TQInboxMessageType)type status:(TQInboxMessageStatus)status complete:(BOOL)complete timestamp: (int) timestamp customStatus:(NSString *)customStatus customAction:(NSString *)customAction;
 ///////////////////////////////////////////////////////////////////////////
 /// @name Properties
 ///////////////////////////////////////////////////////////////////////////
@@ -96,10 +95,6 @@ typedef enum
  */
 @property(readonly) int timestamp;
 
-/**
- * Moment that the notification was scheduled at
- */
-@property(readonly) int scheduled;
 
 /**
  * The status already triggered with the push
