@@ -7,21 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@protocol TQGeoTriggerDelegate <NSObject>
-@required
-- (void)configure:(void (^)(void))completion;
-- (void)start;
-- (void)stop;
-- (void)resume;
-- (void)pause;
-- (NSString *)getDeviceId;
-@end
+#import <GeotriggerSDK/GeotriggerSDK.h>
 
 /** TQ1Geotrigger
  *  Simply commands when to start and when to stop the geotrigger service
  */
-@interface TQ1Geotrigger: NSObject
+@interface TQ1Geotrigger : NSObject
 /** shared
  *  Return an instance of itself, initializating it if there is no TQ1Geotrigger object. Since it's an shared object, it'll only create one.
  *
@@ -29,28 +20,63 @@
  */
 +(TQ1Geotrigger *) shared;
 
-- (void)setManager: (id<TQGeoTriggerDelegate>)manager;
+/** configureWithClientId and Tags
+ * Initialize Geotrigger constants
+ *
+ * @param clientId: the client Id
+ * @param tags: An optional list of tags to be set on the device after it registers itself
+ * @see https://developers.arcgis.com/geotrigger-service/ios-reference/Classes/AGSGTGeotriggerManager.html#//api/name/setupWithClientId:trackingProfile:registerForRemoteNotifications:isProduction:tags:completion:
+ */
+- (void) configureWithClientId:(NSString *)clientId andTags:(NSArray *)tags andCompletionHandler:(void (^)(void))completionHandler;
 
 /** startGeotriggerService
  *  Starts the geotrigger service
  */
-- (void)startGeotriggerService;
+- (void) startGeotriggerService;
 
 /** stopGeotriggerService
  *  Stops the geotrigger service
  */
-- (void)stopGeotriggerService;
+- (void) stopGeotriggerService;
+
+/** startGeotriggerService clientId withTags
+ *  Starts the geotrigger service
+ *  You should use instead the no arguments version of this method and ensure that this is called after the configure method
+ *
+ * @param clientID: the client ID
+ * @param tags: An optional list of tags to be set on the device after it registers itself
+ * @see https://developers.arcgis.com/geotrigger-service/ios-reference/Classes/AGSGTGeotriggerManager.html#//api/name/setupWithClientId:trackingProfile:registerForRemoteNotifications:isProduction:tags:completion:
+ */
+-(void)startGeotriggerService:(NSString *)clientId withTags:(NSArray *)tags __deprecated;
+
+/** stopGeotriggerService clientId withTags
+ *  Stops the geotrigger service
+ *  You should use instead the no arguments version of this method and ensure that this is called after the configure method
+ *
+ * @param clientID: the client ID
+ * @param tags: An optional list of tags to be set on the device after it stops
+ */
+-(void)stopGeotriggerService:(NSString *)clientId withTags:(NSArray *)tags __deprecated;
 
 
 /** resumeGeotriggerService
  *  Starts the geotrigger service
- */
+ *
+  */
 - (void)resumeGeotriggerService;
 
 /** pauseGeotriggerService
  *  Stops the geotrigger service on iOS 8+ for the cases when location usage is only authorized when app is being used
+ *
  */
-- (void)pauseGeotriggerService;
+-(void)pauseGeotriggerService;
+
+/** trackingId
+ *  gets the registered track id to the device
+ *
+ * @return a string representing the track id
+ */
++(NSString *)trackingId;
 
 /** setGeonotificationActive
  *  set if geonotifications should be started according to user preferences
@@ -65,8 +91,8 @@
 /** requestGeofences
  *  gets all app Geofences
  *
- *  @returns an Geofences array
+ * @returns an Geofences array
  */
-- (void)requestGeofences:(int) page completion:(void (^)(NSArray *data))completion;
+-(void) requestGeofences:(int) page completion:(void (^)(NSArray *data))completion;
 
 @end
