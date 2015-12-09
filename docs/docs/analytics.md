@@ -1,3 +1,17 @@
+##Custom Data
+You can send user specific information using `Custom Data` main access method:
+
+```objectivec
+  - (void)addCustomData:(NSDictionary *)customData completion:(void (^)(BOOL success))completion;
+```
+The argument `customData` must be a dictionary with NSString values.
+Another method is available to send custom data:
+
+```objectivec
+  - (void)addCustomData:(NSDictionary *)customData keysToIgnore:(NSArray *)keysToIgnore completion:(void (^)(BOOL success))completion;
+```
+The argument `keysToIgnore` is an array of keys from `customData` that optionally can be passed. These keys will be ignored while filtering audience in tq1 admin portal.
+
 ##Classes
 
 Currently, every access to each page, facebook login can be registered and sent to an analytics area at TQ1, and the class that answers to these function is the TQ1Analytics:
