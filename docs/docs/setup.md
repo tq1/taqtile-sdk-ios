@@ -27,12 +27,11 @@ To do that last part, select your project's target -> Build Phases tab -> drag a
 To make possible for the user to receive pushes, first it's necessary to make some configuration. To do it, set the TQ's required configurations:
 
 ```objectivec
-[[TQ shared] start:APP_KEY withHost:APP_HOST];
+[[TQ shared] start:APP_KEY];
 [[TQ shared] trackRemoteNofitications:someDelegate];
 ```
 
   - APP_KEY: is the identification of the application the app refers to in the TQ1 API.
-  - APP_HOST:  url the TQ1 points to.
   - CLASS: the class that will be delegated to when a push comes.
 
 Also, it's possible to configure how the incoming pushes will inform the user it came:
