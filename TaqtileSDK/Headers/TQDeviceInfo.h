@@ -27,6 +27,11 @@
  */
 + (NSString *)device;
 
+/** platform
+ * @return device's platform
+ */
++ (NSString *)platform;
+
 /** osVersion
  * @return device's os' version
  */
