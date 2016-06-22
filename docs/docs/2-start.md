@@ -31,12 +31,12 @@ They will be explained later on the [push notifications section](4-notifications
 
 ```objectivec
 [[TQ1 shared] startWithKey:AppKey];
-[[TQ1 shared] trackRemoteNofitications:self];
+[[TQ1 shared] trackRemoteNotifications:self];
 ```
 
   - AppKey: the app identifier that will be used by our server. In order to get it, check the [setup section](1-setup.md).
 
-The first method will send the device information to our server and the second one will inform `TQ1 SDK` that this class will handle the push notifications. Note that, ideally `trackRemoteNofitications` should be run at the start of `didFinishLaunching` application method so the sdk can receive the necessary messages.
+The first method will send the device information to our server and the second one will inform `TQ1 SDK` that this class will handle the push notifications. Note that, ideally `trackRemoteNotifications` should be run at the start of `didFinishLaunching` application method so the sdk can receive the necessary messages.
 
 ## Register for remote notifications
 
@@ -48,7 +48,7 @@ In order to receive notifications, you will have to register your application. I
 {
   //Starting TQ1
   [[TQ1 shared] startWithKey:key andEnvironment:Development];
-  [[TQ1 shared] trackRemoteNofitications:self];
+  [[TQ1 shared] trackRemoteNotifications:self];
 
   [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
 
