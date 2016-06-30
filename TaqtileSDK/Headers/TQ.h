@@ -8,9 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define TQ1_PLATFORM "ios"
-#define TQ1_SDK_VERSION @"3.0"
-#define TQ1_API_VERSION @"v3"
+#define TQ_PLATFORM "ios"
 
 @protocol TQDelegate <NSObject>
 - (void)handleForegroundPushNotification:(NSDictionary *)userInfo pushId:(NSString *) pushId;
@@ -56,14 +54,6 @@
  * @return the device udid.
  */
 + (NSString *)udid;
-
-/** apiVersion
- *
- * Returns the server's API version.
- *
- * @return the server api version.
- */
-+ (NSString *)apiVersion;
 
 /** registerForRemoteNotificationTypes delegate
  *
