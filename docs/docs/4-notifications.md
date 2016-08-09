@@ -13,19 +13,19 @@ Also, one should create a class that handles how the app behaves when a push is 
 
 ```objectivec
 @protocol TQDelegate <NSObject>
-  //method used to handle foreground push notifications
-  - (void)handleForegroundPushNotification:(NSDictionary *)userInfo pushId:(NSString *) pushId;
+  - (void)handleForegroundPushNotification:(NSDictionary *)userInfo pushId:(NSString *)pushId;
 
-  //method used to handle background push notifications
-  - (void)handleBackgroundPushNotification:(NSDictionary *)userInfo pushId:(NSString *) pushId;
+  - (void)handleBackgroundPushNotification:(NSDictionary *)userInfo pushId:(NSString *)pushId;
 
-  //method to handle push notification custom actions
+  - (void)handleSilentPushNotification:(NSDictionary *)userInfo pushId:(NSString *)pushId;
+
   -(void)handleCustomActionWithIdentifier:(NSString *)identifier pushId:(NSString *)pushId
 @end
 ```
 
-When the push first arrives, the app may or may not be open, in background, etc; so it's necessary to implement the protocol *TQDelegate* and the *didFinishLaunchingWithOptions* event that will determinate the actions to take in each state.
-In special, the TQProtocol will describe what happens when the app is open, and in its' implementation it will become necessary to get the received push (to display it, for example). In that case one should use the method *getInboxMessage* inside the protocol's implementation, since they do receive the received push's id:
+When the push first arrives, the app may or may not be open, in background, etc; so it's necessary to implement the protocol *TQDelegate* and the *didFinishLaunchingWithOptions* event that will determinate the actions to take in each state. When the application receives a silent notification, only the method `handleSilentPushNotification` is called no matter the application state when it happened. Keep in mind that in this case the user will not be notified.
+
+TQProtocol will describe what happens when the app is open, and in its' implementation it will become necessary to get the received push (to display it, for example). In that case one should use the method *getInboxMessage* inside the protocol's implementation, since they do receive the received push's id:
 
 ```objectivec
 - (void)handleBackgroundPushNotification:(NSDictionary *)userInfo pushId:(NSString *) pushId

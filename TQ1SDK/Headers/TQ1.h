@@ -20,9 +20,16 @@ typedef NS_ENUM(NSInteger, TQ1Environment) {
 };
 
 @protocol TQ1Delegate <NSObject>
+
+@optional
 - (void)handleForegroundPushNotification:(NSDictionary *)userInfo pushId:(NSString *) pushId;
+
 - (void)handleBackgroundPushNotification:(NSDictionary *)userInfo pushId:(NSString *) pushId;
+
+- (void)handleSilentPushNotification:(NSDictionary *)userIndo pushId:(NSString *)pushId;
+
 - (void)handleCustomActionWithIdentifier:(NSString *)identifier pushId:(NSString *)pushId;
+
 @end
 
 /** TQ
