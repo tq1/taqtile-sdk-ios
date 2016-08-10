@@ -1,11 +1,2 @@
-site_name: TQ1 iOS SDK
+site_name: TQ1 - iOS SDK
 theme: readthedocs
-pages:
-- Home: index.md
-- 1 Requirements: 0-requirements.md
-- 2 Setup: 1-setup.md
-- 3 Start: 2-start.md
-- 4 Analytics: 3-analytics.md
-- 5 Notifications: 4-notifications.md
-- 6 Geonotifications: 5-Geonotifications.md
-- 5 Troubleshooting: 6-troubleshooting.md
