@@ -74,4 +74,4 @@ You need also to implement:
 }
 ```
 
-Once this is done, when you run the app TQ1 will automatically detect that you've registered for remote notifications and will send the device token to the server (you can check the logs, there should be a request to TQ1 with the words `device-token`). Also note that when you invoke these methods, a pop-up will be shown to the user asking for remote notification permission, and if the user denies, he won't be able to receive the push notifications until he goes to the settings screen and enable it again.
+Once this is done, when you run the app TQ1 will automatically detect that you've registered for remote notifications and will send the device token to the server (you can check the logs, there should be a request to TQ1 with the words `device-token`).
