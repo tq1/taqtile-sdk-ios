@@ -250,6 +250,8 @@ typedef enum
  */
 -(BOOL)addCustomStatus:(NSString *)pushId status:(NSString *) status;
 
+-(void)setAppGroupId: (NSString *)appGroupId;
+
 
 
 @end
