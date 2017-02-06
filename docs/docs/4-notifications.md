@@ -175,3 +175,56 @@ There is a method available for removing all notifications specified by its `TQ1
 ```objectivec
 [[TQ1Inbox shared] removeMessagesWithStatus: TQ1InboxMessageStatusAll]
 ```
+
+## Adding Mutable Push Notifications Support
+
+From iOS 10 on, iOS devices are able to handle the push notification content as soon as it arrives, with the new capability, we are able to modify the push notification content and also execute code in order to add it to the push notification database, so notifications that are not opened, are not lost anymore.
+
+In order to do it though, some steps are required. They will be listed below:
+
+- First thing is to add the Notification Service Extension, by going to `File > New > Target...` and selecting the extension. This will generate a new target and you will see that there will be new files in your project. You can view more information about the extension's methods [here](https://developer.apple.com/reference/usernotifications/unnotificationserviceextension).
+
+![](../images/mutable-1.png)
+
+- You will notice a new target will be added to your project, so you also need to edit your `Podfile`, so TQ1 pod will be installed on the extension as well. For example, if the name of your extension target is `notification`, the lines on `Podfile` will be something like this:
+
+```
+target :notification do
+    pod 'TQ1SDK', :git => 'https://github.com/tq1/taqtile-sdk-ios.git', :tag => '3.x.x'
+end
+```
+
+Perform a `pod install` after.
+
+- As the extension and the app have separate databases, in order to use the same one, you need to create an [app group](https://developer.apple.com/library/content/documentation/General/Conceptual/ExtensibilityPG/ExtensionScenarios.html#//apple_ref/doc/uid/TP40014214-CH21-SW1) that will be used by your extension and your app. In order to add app groups you must:
+- Create an app group on Apple Developer portal
+
+![](../images/mutable-2.png)
+
+- Add the app group entitlement on your project (you can do it through Xcode only, but if it doesn't work, do it on developer portal and then add it using Xcode), both on app and extension, selecting the appropriate app group name.
+
+![](../images/mutable-3.png)
+![](../images/mutable-4.png)
+![](../images/mutable-5.png)
+
+- Important: You will have to regenerate you provisioning profile in order to reflect the new app group, otherwise you will see an error on Xcode.
+- Once you have the app group set up, now you must pass the app group name o n TQ1 initialization, by changing the start method to be like:
+```objectivec
+[[TQ1 shared] startWithKey:@"5787cb42d716ea0700abcdf andAppGroup:@"group.com.yourgroupname"];
+```
+- Also import TQ1 extension helper on your extension:
+```objectivec
+#import <TQ1ExtensionHelper.h>
+```
+- And in order to add the notification to the database as soon as it arrives, you should use the `saveNotification` method, like in the following example:
+```objectivec
+- (void)didReceiveNotificationRequest:(UNNotificationRequest *)request withContentHandler:(void (^)(UNNotificationContent * _Nonnull))contentHandler {
+    self.contentHandler = contentHandler;
+    self.bestAttemptContent = [request.content mutableCopy];
+    [[TQ1ExtensionHelper shared] saveNotification:self.bestAttemptContent appGroup:@"group.com.yourgroupname"];
+
+    self.contentHandler(self.bestAttemptContent);
+}
+```
+- Remember that you must set the `mutable` flag to true on TQ1 so the push will be sent as mutable and the extension code is executed.
+- Once this is done you will notice that even if you do not open the push notification, it will be on the notification list.
