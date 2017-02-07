@@ -124,6 +124,8 @@ typedef NS_ENUM(NSInteger, TQ1Environment) {
  */
 - (void)startWithKey:(NSString *)key andEnvironment:(TQ1Environment)environment;
 
+- (void)startWithKey:(NSString *)key andAppGroup:(NSString *)appGroup;
+
 /** start with app key
  *
  * Initial configuration for receiving push notifications. Production environment as default
