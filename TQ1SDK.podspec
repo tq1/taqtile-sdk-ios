@@ -9,13 +9,13 @@
  
  Pod::Spec.new do |s|
  s.name = "TQ1SDK"
- s.version = "3.3.1-no-tracking"
+ s.version = "3.3.2-no-tracking"
  s.summary = "Library TQ1SDK to implement TQ1 on projects"
  
  s.homepage = "https://github.com/tq1/taqtile-sdk-ios"
  s.license = { :type => 'Comercial'}
  s.author = { "Taqtile" => "felipe.sabino@taqtile.com" }
- s.source = { :git => "git@github.com:tq1/br-tq1-ios.git", :tag => "3.3.1-no-tracking" }
+ s.source = { :git => "git@github.com:tq1/br-tq1-ios.git", :tag => "3.3.2-no-tracking" }
  
  s.platform = :ios, '8.0'
  s.requires_arc = true
